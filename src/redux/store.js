@@ -1,7 +1,12 @@
-import {createStore} from "redux"
-import {counter} from './reducers'
+/*
+redux最核心的管理對象store
+ */
+import {createStore, applyMiddleware} from "redux";
+import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension";
 
-//生成一個store對象
-const store = createStore(counter) //內部會第一次調用reducer函數得到初始state
+import reducers from './reducers'
 
-export default store
+export default createStore(reducers,
+    composeWithDevTools(applyMiddleware(thunk))
+)
